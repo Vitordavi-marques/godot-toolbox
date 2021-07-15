@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "GTInputController",
+"class": "GTDeviceController",
+"language": "GDScript",
+"path": "res://libs/gt_input_controller/controllers/gt_device_controller.gd"
+}, {
+"base": "Node",
+"class": "GTInputController",
+"language": "GDScript",
+"path": "res://libs/gt_input_controller/__gt_input_controller.gd"
+} ]
 _global_script_class_icons={
-
+"GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
+"GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg"
 }
 
 [application]
