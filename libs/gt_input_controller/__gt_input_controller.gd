@@ -44,4 +44,9 @@ func get_action(action: String):
 
 # Captures the input state of the controller's actions in the current moment
 func poll_input():
+	if is_active:
+		poll_state()
+
+# Implementation of the method that polls input state.
+func poll_state():
 	pass
