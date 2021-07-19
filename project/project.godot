@@ -15,13 +15,31 @@ _global_script_classes=[ {
 "path": "res://libs/gt_input_controller/controllers/gt_device_controller.gd"
 }, {
 "base": "Node",
+"class": "GTHealth",
+"language": "GDScript",
+"path": "res://libs/gt_health/gt_health.gd"
+}, {
+"base": "Node",
 "class": "GTInputController",
 "language": "GDScript",
 "path": "res://libs/gt_input_controller/__gt_input_controller.gd"
+}, {
+"base": "Node",
+"class": "GTPoints",
+"language": "GDScript",
+"path": "res://libs/gt_points/gt_points.gd"
+}, {
+"base": "Area2D",
+"class": "GTRandomPointArea2D",
+"language": "GDScript",
+"path": "res://libs/gt_random_point_area_2d/gt_random_point_area_2d.gd"
 } ]
 _global_script_class_icons={
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
-"GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg"
+"GTHealth": "",
+"GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
+"GTPoints": "",
+"GTRandomPointArea2D": ""
 }
 
 [application]
