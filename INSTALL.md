@@ -5,4 +5,4 @@
 - Turn off some GDScript warnings that are irrelevant and annoying.
 - Set display size and test size, and also aspect ratio type and 2d mode.
 - Setup physics layers (classic: entities, terrain and triggers).
-- Delete game_3d if game is 2D, and delete game_2d if game is 3D. Rename the remaining game scene to game.tscn
+- Delete game_3d if game is 2D, and delete game_2d if game is 3D. Rename the remaining game scene to game.tscn 
