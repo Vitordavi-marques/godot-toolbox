@@ -15,9 +15,9 @@ _global_script_classes=[ {
 "path": "res://libs/gt_input_controller/controllers/gt_device_controller.gd"
 }, {
 "base": "Node",
-"class": "GTHealth",
+"class": "GTInputAction",
 "language": "GDScript",
-"path": "res://libs/gt_health/gt_health.gd"
+"path": "res://libs/gt_input_controller/actions/__gt_input_action.gd"
 }, {
 "base": "Node",
 "class": "GTInputController",
@@ -36,7 +36,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
-"GTHealth": "",
+"GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTPoints": "",
 "GTRandomPointArea2D": ""
