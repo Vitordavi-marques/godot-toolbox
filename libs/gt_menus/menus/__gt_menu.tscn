@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_menus/menus/__gt_menu.gd" type="Script" id=2]
+
+[node name="_menu" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Screens" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+actor_path = NodePath("..")
