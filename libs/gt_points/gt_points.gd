@@ -5,9 +5,9 @@ signal points_updated(current)
 signal points_gained(current, gained)
 signal points_lost(current, lost)
 
-export (int) var INITIAL_POINTS = 0
+export (int) var initial_points = 0
 
-onready var current_points = INITIAL_POINTS
+onready var current_points = initial_points
 
 func gain_points(amount: int) -> void:
 	current_points += amount
