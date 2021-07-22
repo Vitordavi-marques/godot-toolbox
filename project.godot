@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_points/gt_points.gd"
 }, {
+"base": "AudioStreamPlayer",
+"class": "GTRandomAudioPlayer",
+"language": "GDScript",
+"path": "res://libs/gt_random_audio_player/gt_random_audio_player.gd"
+}, {
 "base": "Node2D",
 "class": "GTRandomPointZone2D",
 "language": "GDScript",
@@ -51,6 +56,7 @@ _global_script_class_icons={
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTPatternLabel": "",
 "GTPoints": "",
+"GTRandomAudioPlayer": "",
 "GTRandomPointZone2D": ""
 }
 
