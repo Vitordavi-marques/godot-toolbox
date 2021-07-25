@@ -3,7 +3,7 @@ class_name GTTriggerArea2D
 
 signal effect()
 
-enum TRIGGER_TYPE { ENTER, INSIDE, EXIT }
+enum TRIGGER_TYPE { ENTER = 0, INSIDE = 1, EXIT = 2 }
 
 export (TRIGGER_TYPE) var trigger_type = TRIGGER_TYPE.ENTER
 
