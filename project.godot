@@ -59,6 +59,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_random_point_zone_2d/gt_random_point_zone_2d.gd"
 }, {
+"base": "Node",
+"class": "GTState",
+"language": "GDScript",
+"path": "res://libs/gt_state_machine/__gt_state.gd"
+}, {
+"base": "Node",
+"class": "GTStateMachine",
+"language": "GDScript",
+"path": "res://libs/gt_state_machine/gt_state_machine.gd"
+}, {
 "base": "GTArea2D",
 "class": "GTTriggerArea2D",
 "language": "GDScript",
@@ -75,6 +85,8 @@ _global_script_class_icons={
 "GTPoints": "",
 "GTRandomAudioPlayer": "",
 "GTRandomPointZone2D": "",
+"GTState": "",
+"GTStateMachine": "res://libs/gt_state_machine/icons/gt_state_machine.svg",
 "GTTriggerArea2D": ""
 }
 
