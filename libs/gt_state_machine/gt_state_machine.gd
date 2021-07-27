@@ -1,6 +1,8 @@
 extends Node
 class_name GTStateMachine, "res://libs/gt_state_machine/icons/gt_state_machine.svg"
 
+signal state_changed(old_state, new_state)
+
 export (NodePath) var actor_path
 export (bool) var is_active : bool = true
 var actor : Node
@@ -23,12 +25,14 @@ func initialize() -> void:
 
 func change_state(new_state: Node, info: Dictionary = {}) -> void:
 	if is_active:
+		var old_state = current_state
 		current_state.exit()
 		current_state.emit_signal("state_exited")
 		current_state = new_state
 		current_state.actor = actor
 		current_state.enter(info)
 		current_state.emit_signal("state_entered")
+		emit_signal("state_changed", old_state, new_state)
 
 func change_state_path(new_state_path: String, info: Dictionary = {}) -> void:
 	change_state(get_node(new_state_path), info)
