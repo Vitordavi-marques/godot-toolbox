@@ -13,8 +13,9 @@ func _ready():
 	for child in get_children():
 		if child is GTState:
 			child_states += 1
-	assert(actor != null, "%s (%s) has no actor_path set" % [self.name, self])
+	assert(actor_path != null and not actor_path.is_empty(), "%s (%s) has no actor_path set" % [self.name, self])
 	assert(child_states > 0, "%s (%s) has no child states" % [self.name, self])
+	actor = get_node(actor_path)
 	actor.connect("ready", self, "initialize")
 
 func initialize() -> void:
