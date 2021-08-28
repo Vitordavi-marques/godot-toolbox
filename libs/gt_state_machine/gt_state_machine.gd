@@ -5,6 +5,7 @@ signal state_changed(old_state, new_state)
 
 export (NodePath) var actor_path
 export (bool) var is_active : bool = true
+export (bool) var debug_mode : bool = false
 var actor : Node
 var current_state : Node
 
@@ -53,5 +54,7 @@ func _process(delta):
 		current_state.process(delta)
 
 func _physics_process(delta):
+	if debug_mode:
+		print(current_state.name)
 	if is_active and current_state.has_method("physics_process") and current_state.do_physics_process:
 		current_state.physics_process(delta)

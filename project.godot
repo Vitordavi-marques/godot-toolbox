@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_state_machine/gt_state_machine.gd"
 }, {
+"base": "Node",
+"class": "GTStateTransition",
+"language": "GDScript",
+"path": "res://libs/gt_state_machine/__gt_state_transition.gd"
+}, {
 "base": "GTArea2D",
 "class": "GTTriggerArea2D",
 "language": "GDScript",
@@ -87,6 +92,7 @@ _global_script_class_icons={
 "GTRandomPointZone2D": "",
 "GTState": "",
 "GTStateMachine": "res://libs/gt_state_machine/icons/gt_state_machine.svg",
+"GTStateTransition": "",
 "GTTriggerArea2D": ""
 }
 
