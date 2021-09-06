@@ -17,3 +17,7 @@ func gravity_formula(height, time):
 
 func jump_speed_formula(height, time):
 	return -2*height/time
+
+func rand_direction() -> Vector2:
+	var rand_angle = randf()*2*PI
+	return Vector2(cos(rand_angle), sin(rand_angle))

@@ -1,4 +1,4 @@
-extends Node2D
+extends Spatial
 
 func _ready():
 	#randomize()

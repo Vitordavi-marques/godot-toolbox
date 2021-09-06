@@ -2,14 +2,19 @@ extends Node
 class_name GTTime
 
 var pause_timer : Timer
+var count_timer : Timer
 var time_scale : float
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	pause_timer = Timer.new()
 	pause_timer.one_shot = true
+	count_timer = Timer.new()
+	count_timer.one_shot = true
 	add_child(pause_timer)
+	add_child(count_timer)
 	pause_timer.connect("timeout", self, "resume_time")
+	count_timer.connect("timeout", self, "normalize_time")
 
 func pause_time(seconds: float = 0.0) -> void:
 	if seconds > 0.0:
@@ -20,7 +25,10 @@ func pause_time(seconds: float = 0.0) -> void:
 func resume_time() -> void:
 	get_tree().paused = false
 
-func slow_time(scale: float = 1.0) -> void:
+func slow_time(scale: float, duration: float = 0.0) -> void:
+	if duration > 0.0:
+		count_timer.wait_time = duration * scale
+		count_timer.start()
 	time_scale = scale
 	Engine.time_scale = time_scale
 

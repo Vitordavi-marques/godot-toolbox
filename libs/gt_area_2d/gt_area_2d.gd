@@ -8,6 +8,7 @@ signal grouped_body_exited(body)
 
 export (Array, String) var collidable_groups
 export (Array, String) var excluded_groups
+export (bool) var disable_on_ready = false
 
 var is_area_colliding : bool = false
 var is_body_colliding : bool = false
@@ -19,6 +20,8 @@ func _ready():
 	connect("area_exited", self, "_on_area_exited")
 	connect("body_entered", self, "_on_body_entered")
 	connect("body_exited", self, "_on_body_exited")
+	if disable_on_ready:
+		disable_all_shapes()
 
 func is_node_collidable(node: Node) -> bool:
 	for group in excluded_groups:
@@ -56,6 +59,11 @@ func _on_body_exited(body: Node) -> void:
 		is_body_colliding = false
 		collider_body = null
 		emit_signal("grouped_body_exited", body)
+
+func enable_all_shapes() -> void:
+	for child in get_children():
+		if child is CollisionShape2D:
+			child.set_deferred("disabled", false)
 
 func disable_all_shapes() -> void:
 	for child in get_children():

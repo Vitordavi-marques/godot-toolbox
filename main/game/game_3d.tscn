@@ -1,3 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="game" type="Spatial"]
+[ext_resource path="res://main/game/game_3d.gd" type="Script" id=1]
+
+[node name="Game" type="Spatial"]
+script = ExtResource( 1 )
