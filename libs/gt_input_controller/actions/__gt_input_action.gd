@@ -5,4 +5,4 @@ signal just_pressed()
 signal pressed()
 signal just_released()
 
-export (String) var action
+export (String) var action # Action string

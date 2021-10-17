@@ -9,12 +9,12 @@ export (int) var initial_points = 0
 
 onready var current_points = initial_points
 
-func gain_points(amount: int) -> void:
+func gain_points(amount: int = 1) -> void:
 	current_points += amount
 	emit_signal("points_updated", current_points)
 	emit_signal("points_gained", current_points, amount)
 
-func lose_points(amount: int) -> void:
+func lose_points(amount: int = 1) -> void:
 	current_points -= amount
 	emit_signal("points_updated", current_points)
 	emit_signal("points_lost", current_points, amount)

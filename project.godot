@@ -64,11 +64,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_pattern_label/gt_pattern_label.gd"
 }, {
-"base": "Position2D",
-"class": "GTPoint2D",
-"language": "GDScript",
-"path": "res://libs/gt_point_2d/gt_point_2d.gd"
-}, {
 "base": "Node",
 "class": "GTPoints",
 "language": "GDScript",
@@ -131,7 +126,6 @@ _global_script_class_icons={
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTJuice2D": "",
 "GTPatternLabel": "",
-"GTPoint2D": "",
 "GTPoints": "",
 "GTRandomPointZone2D": "",
 "GTScreenShake2D": "",

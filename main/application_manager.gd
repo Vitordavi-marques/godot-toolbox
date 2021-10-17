@@ -12,7 +12,7 @@ const SCENES_PATH = {
 	SCENES.GAME_3D : "res://main/game/game_3d.tscn"}
 
 func load_scene(scene: int):
-	if SCENES.has(scene):
+	if SCENES.values().has(scene):
 		get_tree().change_scene(SCENES_PATH[scene])
 
 func reload():

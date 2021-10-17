@@ -4,9 +4,8 @@ class_name GTTriggerArea2D
 signal effect()
 
 enum TRIGGER_TYPE { ENTER = 0, INSIDE = 1, EXIT = 2 }
-
-export (TRIGGER_TYPE) var trigger_type = TRIGGER_TYPE.ENTER
-export (bool) var one_shot = false
+export (TRIGGER_TYPE) var trigger_type = TRIGGER_TYPE.ENTER # The type of this trigger
+export (bool) var one_shot = false # Whether this node triggers only once, or not
 
 func _ready():
 	connect("grouped_area_entered", self, "_on_grouped_area_entered")
@@ -17,28 +16,28 @@ func _ready():
 func _physics_process(delta):
 	if trigger_type == TRIGGER_TYPE.INSIDE:
 		if is_area_colliding or is_body_colliding:
-			emit_effect()
+			_emit_effect()
 
-func _on_grouped_area_entered(_area: Area2D):
+func _on_grouped_area_entered(_area: Area2D) -> void:
 	if trigger_type == TRIGGER_TYPE.ENTER:
-		emit_effect()
+		_emit_effect()
 
-func _on_grouped_area_exited(_area: Area2D):
+func _on_grouped_area_exited(_area: Area2D) -> void:
 	if trigger_type == TRIGGER_TYPE.EXIT:
-		emit_effect()
+		_emit_effect()
 
-func _on_grouped_body_entered(_body: Node):
+func _on_grouped_body_entered(_body: Node) -> void:
 	if trigger_type == TRIGGER_TYPE.ENTER:
-		emit_effect()
+		_emit_effect()
 
-func _on_grouped_body_exited(_body: Node):
+func _on_grouped_body_exited(_body: Node) -> void:
 	if trigger_type == TRIGGER_TYPE.EXIT:
-		emit_effect()
+		_emit_effect()
 
-func check_one_shot():
+func _check_one_shot() -> void:
 	if one_shot:
 		disable_all_shapes()
 
-func emit_effect():
-	check_one_shot()
+func _emit_effect() -> void:
+	_check_one_shot()
 	emit_signal("effect")

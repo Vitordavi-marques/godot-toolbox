@@ -5,7 +5,7 @@ signal result(value)
 signal succeded()
 signal failed()
 
-enum FORMULA_TYPE {
+enum FORMULA_COMPARE_TYPE {
 	EQUALS,
 	NOT_EQUALS,
 	GREATER_THAN,
@@ -13,24 +13,25 @@ enum FORMULA_TYPE {
 	LESS_THAN,
 	LESS_OR_EQUAL}
 
-export (FORMULA_TYPE) var formula_type
-export (bool) var emit_result = true
-export (float) var expected_value = 0
+export (FORMULA_COMPARE_TYPE) var formula_compare_type # The formula evaluation type
+export (bool) var emit_result = true # If the result should be emitted in a signal
+export (float) var expected_value = 0 # The expected numerical value for the formula
 
+# Calculates the result by evaluating 'current_value' in this formula
 func validate(current_value: float) -> bool:
 	var result = true
-	match formula_type:
-		FORMULA_TYPE.EQUALS:
+	match formula_compare_type:
+		FORMULA_COMPARE_TYPE.EQUALS:
 			result = current_value == expected_value
-		FORMULA_TYPE.NOT_EQUALS:
+		FORMULA_COMPARE_TYPE.NOT_EQUALS:
 			result = current_value != expected_value
-		FORMULA_TYPE.GREATER_THAN:
+		FORMULA_COMPARE_TYPE.GREATER_THAN:
 			result = current_value > expected_value
-		FORMULA_TYPE.GREATER_OR_EQUAL:
+		FORMULA_COMPARE_TYPE.GREATER_OR_EQUAL:
 			result = current_value >= expected_value
-		FORMULA_TYPE.LESS_THAN:
+		FORMULA_COMPARE_TYPE.LESS_THAN:
 			result = current_value < expected_value
-		FORMULA_TYPE.LESS_OR_EQUAL:
+		FORMULA_COMPARE_TYPE.LESS_OR_EQUAL:
 			result = current_value <= expected_value
 	if emit_result:
 		emit_signal("result", result)

@@ -21,3 +21,6 @@ func jump_speed_formula(height, time):
 func rand_direction() -> Vector2:
 	var rand_angle = randf()*2*PI
 	return Vector2(cos(rand_angle), sin(rand_angle))
+
+func component_assert_message(component) -> String:
+	return "Error initializing Component '%s' (%s)" % [component.name, component]
