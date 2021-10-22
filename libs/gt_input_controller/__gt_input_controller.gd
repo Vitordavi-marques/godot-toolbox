@@ -8,7 +8,7 @@ const METHODS = {
 	JUST_RELEASED : "just_released"}
 
 export (String) var tag = "" # Suffix used in string concatenation for each input action available
-export (bool) var is_active = true # Whether this node is active or not
+export (bool) var is_enabled = true # Whether this node is enabled or not
 var _actions = {}
 var _values = {}
 
@@ -20,7 +20,7 @@ func _ready():
 		_values[action] = { JUST_PRESSED: false, PRESSED: false, JUST_RELEASED: false }
 
 func _process(delta):
-	if is_active:
+	if is_enabled:
 		poll_input()
 
 # Sets all values for each action and method to false
@@ -51,8 +51,8 @@ func poll_input() -> void:
 
 # Disables this node's functionality
 func disable() -> void:
-	is_active = false
+	is_enabled = false
 
 # Disables this node's functionality
 func enable() -> void:
-	is_active = true
+	is_enabled = true

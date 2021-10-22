@@ -22,5 +22,14 @@ func rand_direction() -> Vector2:
 	var rand_angle = randf()*2*PI
 	return Vector2(cos(rand_angle), sin(rand_angle))
 
+func get_screen_size() -> Vector2:
+	return get_viewport().get_visible_rect().size
+
+func get_screen_center() -> Vector2:
+	return get_screen_size() / 2
+
+func rand_sign() -> int:
+	return int(pow(-1,randi()%2))
+
 func component_assert_message(component) -> String:
 	return "Error initializing Component '%s' (%s)" % [component.name, component]

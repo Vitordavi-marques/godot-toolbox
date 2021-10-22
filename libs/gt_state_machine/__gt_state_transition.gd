@@ -5,7 +5,7 @@ signal transition_done()
 
 export (NodePath) var _end_state_path
 
-export (bool) var is_active = true # Whether this transition is enabled or not
+export (bool) var is_enabled = true # Whether this transition is enabled or not
 var start_state : Node # Starting node before transition
 var end_state : Node # Node that will be transitioned to
 
@@ -22,7 +22,7 @@ func set_info(info: Dictionary) -> void:
 	_info_for_transition = info
 
 func _can_transition() -> bool:
-	return is_active and start_state.fsm.current_state == start_state
+	return is_enabled and start_state.fsm.current_state == start_state
 
 # Performs the transition
 func do_transition():
@@ -32,8 +32,8 @@ func do_transition():
 
 # Disables this node's functionality
 func disable() -> void:
-	is_active = false
+	is_enabled = false
 
 # Disables this node's functionality
 func enable() -> void:
-	is_active = true
+	is_enabled = true

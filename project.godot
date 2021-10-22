@@ -44,6 +44,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_health/gt_health.gd"
 }, {
+"base": "GTTriggerArea2D",
+"class": "GTHitbox2D",
+"language": "GDScript",
+"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd"
+}, {
+"base": "GTTriggerArea2D",
+"class": "GTHurtbox2D",
+"language": "GDScript",
+"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd"
+}, {
 "base": "Node",
 "class": "GTInputAction",
 "language": "GDScript",
@@ -113,6 +123,16 @@ _global_script_classes=[ {
 "class": "GTTriggerArea2D",
 "language": "GDScript",
 "path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd"
+}, {
+"base": "Node",
+"class": "LevelLoader",
+"language": "GDScript",
+"path": "res://components/level_loader/level_loader.gd"
+}, {
+"base": "GTDeviceController",
+"class": "TopdownPlayerController",
+"language": "GDScript",
+"path": "res://components/topdown_controller/topdown_player_controller.gd"
 } ]
 _global_script_class_icons={
 "ApplicationManager": "",
@@ -122,6 +142,8 @@ _global_script_class_icons={
 "GTEntity2D": "",
 "GTFormula": "",
 "GTHealth": "",
+"GTHitbox2D": "",
+"GTHurtbox2D": "",
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTJuice2D": "",
@@ -135,7 +157,9 @@ _global_script_class_icons={
 "GTTeleporter2D": "",
 "GTTime": "",
 "GTTimer": "",
-"GTTriggerArea2D": ""
+"GTTriggerArea2D": "",
+"LevelLoader": "",
+"TopdownPlayerController": ""
 }
 
 [application]

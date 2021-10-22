@@ -3,15 +3,15 @@ class_name GTScreenShake2D
 
 export (NodePath) var _camera_path # Path of the Camera2D node to be affected
 export (Vector2) var movement_mask = Vector2(1, 1) # Movement mask multiplier
-export (bool) var is_active = true # Whether this node is active or not
+export (bool) var is_enabled = true # Whether this node is enabled or not
 
 var _camera : Camera2D
 var _tween : Tween
 var _frequency_timer : Timer
 var _duration_timer : Timer
 
-var is_playing : bool = false # Whether the camera is currently shaking or not
-var current_intensity : float = 0.0 # Current intensity of the screen shake (in pixels)
+var _is_playing : bool = false # Whether the camera is currently shaking or not
+var _current_intensity : float = 0.0 # Current intensity of the screen shake (in pixels)
 var _current_direction : Vector2 # Current direction of the screen shake (changes randomly or not)
 var _initial_direction : Vector2 # Initial direction of the screen shake (used for calculating going in-back animations)
 
@@ -31,11 +31,11 @@ func _ready():
 
 # Simple camera shake with 'intensity' in pixels, 'duration' in seconds, and many sub-shakes each with 'frequency' duration
 func shake_simple(_intensity: float = 8.0, duration: float = 0.5, frequency: float = 0.1, direction: Vector2 = Vector2.ZERO) -> void:
-	if not is_active:
+	if not is_enabled:
 		return
-	current_intensity = _intensity
+	_current_intensity = _intensity
 	_initial_direction = direction
-	is_playing = true
+	_is_playing = true
 	
 	_frequency_timer.wait_time = frequency
 	_duration_timer.wait_time = duration
@@ -48,12 +48,12 @@ func _shake(direction: Vector2 = Vector2.ZERO) -> void:
 		direction = Utils.rand_direction()
 	_current_direction = direction
 	
-	var new_offset = direction * current_intensity
+	var new_offset = direction * _current_intensity
 	_tween.interpolate_property(_camera, "offset", _camera.offset, new_offset, _frequency_timer.wait_time)
 	_tween.start()
 
 func _on_FrequencyTimer_timeout() -> void:
-	if is_playing:
+	if _is_playing:
 		_frequency_timer.start()
 		if _initial_direction == Vector2.ZERO:
 			_shake(-_current_direction)
@@ -61,14 +61,14 @@ func _on_FrequencyTimer_timeout() -> void:
 			_shake(_current_direction)
 
 func _on_DurationTimer_timeout() -> void:
-	is_playing = false
+	_is_playing = false
 	_tween.interpolate_property(_camera, "offset", _camera.offset, Vector2.ZERO, _frequency_timer.wait_time)
 	_tween.start()
 
 # Disables this node's functionality
 func disable() -> void:
-	is_active = false
+	is_enabled = false
 
 # Disables this node's functionality
 func enable() -> void:
-	is_active = true
+	is_enabled = true

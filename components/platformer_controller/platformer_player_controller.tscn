@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends GTDeviceController
+
+var move_direction : int
+
+func _physics_process(delta):
+	move_direction = int(get_input(\"act_move_right\", PRESSED))-int(get_input(\"act_move_left\", PRESSED))
+"
+
+[node name="player_controller" type="Node"]
+script = SubResource( 1 )
+
+[node name="move_left" type="Node" parent="."]
+script = ExtResource( 1 )
+action = "act_move_left"
+
+[node name="move_right" type="Node" parent="."]
+script = ExtResource( 1 )
+action = "act_move_right"
+
+[node name="jump" type="Node" parent="."]
+script = ExtResource( 1 )
+action = "act_jump"

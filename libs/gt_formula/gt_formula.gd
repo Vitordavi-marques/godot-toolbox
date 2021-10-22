@@ -13,9 +13,15 @@ enum FORMULA_COMPARE_TYPE {
 	LESS_THAN,
 	LESS_OR_EQUAL}
 
-export (FORMULA_COMPARE_TYPE) var formula_compare_type # The formula evaluation type
+export (FORMULA_COMPARE_TYPE) var formula_compare_type setget set_formula_compare_type # The formula evaluation type
 export (bool) var emit_result = true # If the result should be emitted in a signal
-export (float) var expected_value = 0 # The expected numerical value for the formula
+export (float) var expected_value = 0 setget set_expected_value # The expected numerical value for the formula
+
+func set_formula_compare_type(_value):
+	formula_compare_type = _value
+
+func set_expected_value(_value):
+	expected_value = _value
 
 # Calculates the result by evaluating 'current_value' in this formula
 func validate(current_value: float) -> bool:

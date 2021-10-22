@@ -10,4 +10,4 @@ func _process(delta):
 		get_tree().quit()
 
 func get_game():
-	pass
+	return get_node("/root/Game")

@@ -39,3 +39,7 @@ func slow_time(scale: float, duration: float = 0.0) -> void:
 func normalize_time() -> void:
 	time_scale = 1.0
 	Engine.time_scale = 1.0
+
+func set_time_scale(amount: float) -> void:
+	time_scale = amount
+	Engine.time_scale = time_scale
