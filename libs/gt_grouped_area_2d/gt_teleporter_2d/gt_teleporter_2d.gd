@@ -1,4 +1,4 @@
-extends GTArea2D
+extends GTGroupedArea2D
 class_name GTTeleporter2D
 
 signal teleported_entity(cause, entity)

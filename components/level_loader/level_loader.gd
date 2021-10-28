@@ -1,5 +1,4 @@
 extends Node
-class_name LevelLoader
 
 signal level_started()
 signal level_finished()

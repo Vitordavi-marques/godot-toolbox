@@ -1,4 +1,4 @@
-extends GTArea2D
+extends GTGroupedArea2D
 class_name GTTriggerArea2D
 
 signal effect()

@@ -12,7 +12,7 @@ export (int) var initial_health = 100 # Initial health upon initialization
 export (bool) var _debug_mode = false
 
 var is_alive : bool = true # Is alive or not
-onready var current_health = initial_health # Current health
+onready var current_health : int = initial_health # Current health
 
 func _process(delta):
 	if _debug_mode: print(current_health)

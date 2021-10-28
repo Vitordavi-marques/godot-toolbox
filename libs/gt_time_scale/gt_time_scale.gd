@@ -1,5 +1,5 @@
 extends Node
-class_name GTTime
+class_name GTTimeScale
 
 var _pause_timer : Timer
 var _count_timer : Timer
@@ -19,6 +19,7 @@ func _ready():
 # Freezes time for a certain duration, or indefinetly
 func pause_time(seconds: float = 0.0) -> void:
 	if seconds > 0.0:
+		_pause_timer.stop()
 		_pause_timer.wait_time = seconds
 		_pause_timer.start()
 	get_tree().paused = true
@@ -30,6 +31,7 @@ func resume_time() -> void:
 # Slows down time by a certain factor, for a certain duration (or indefinetly)
 func slow_time(scale: float, duration: float = 0.0) -> void:
 	if duration > 0.0:
+		_count_timer.stop()
 		_count_timer.wait_time = duration * scale
 		_count_timer.start()
 	time_scale = scale

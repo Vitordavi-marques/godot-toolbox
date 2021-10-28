@@ -1,5 +1,5 @@
 extends Area2D
-class_name GTArea2D
+class_name GTGroupedArea2D
 
 signal grouped_area_entered(area)
 signal grouped_area_exited(area)

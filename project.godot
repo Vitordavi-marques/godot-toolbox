@@ -9,16 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
-"class": "ApplicationManager",
-"language": "GDScript",
-"path": "res://main/application_manager.gd"
-}, {
-"base": "Area2D",
-"class": "GTArea2D",
-"language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_area_2d.gd"
-}, {
 "base": "AudioStreamPlayer",
 "class": "GTAudioPlayer",
 "language": "GDScript",
@@ -39,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_formula/gt_formula.gd"
 }, {
+"base": "Area2D",
+"class": "GTGroupedArea2D",
+"language": "GDScript",
+"path": "res://libs/gt_grouped_area_2d/gt_grouped_area_2d.gd"
+}, {
 "base": "Node",
 "class": "GTHealth",
 "language": "GDScript",
@@ -47,12 +42,12 @@ _global_script_classes=[ {
 "base": "GTTriggerArea2D",
 "class": "GTHitbox2D",
 "language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd"
+"path": "res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd"
 }, {
 "base": "GTTriggerArea2D",
 "class": "GTHurtbox2D",
 "language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd"
+"path": "res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd"
 }, {
 "base": "Node",
 "class": "GTInputAction",
@@ -104,43 +99,42 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_state_machine/__gt_state_transition.gd"
 }, {
-"base": "GTArea2D",
+"base": "Node",
+"class": "GTStopWatch",
+"language": "GDScript",
+"path": "res://libs/gt_stopwatch/gt_stopwatch.gd"
+}, {
+"base": "GTGroupedArea2D",
 "class": "GTTeleporter2D",
 "language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd"
+"path": "res://libs/gt_grouped_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd"
 }, {
 "base": "Node",
-"class": "GTTime",
+"class": "GTTimeScale",
 "language": "GDScript",
-"path": "res://libs/gt_time/gt_time.gd"
+"path": "res://libs/gt_time_scale/gt_time_scale.gd"
 }, {
 "base": "Timer",
 "class": "GTTimer",
 "language": "GDScript",
 "path": "res://libs/gt_timer/gt_timer.gd"
 }, {
-"base": "GTArea2D",
+"base": "GTGroupedArea2D",
 "class": "GTTriggerArea2D",
 "language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd"
+"path": "res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd"
 }, {
-"base": "Node",
-"class": "LevelLoader",
+"base": "Tween",
+"class": "GTTween",
 "language": "GDScript",
-"path": "res://components/level_loader/level_loader.gd"
-}, {
-"base": "GTDeviceController",
-"class": "TopdownPlayerController",
-"language": "GDScript",
-"path": "res://components/topdown_controller/topdown_player_controller.gd"
+"path": "res://libs/gt_tween/gt_tween.gd"
 } ]
 _global_script_class_icons={
-"ApplicationManager": "",
-"GTArea2D": "",
 "GTAudioPlayer": "",
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "GTEntity2D": "",
 "GTFormula": "",
+"GTGroupedArea2D": "",
 "GTHealth": "",
 "GTHitbox2D": "",
 "GTHurtbox2D": "",
@@ -154,12 +148,12 @@ _global_script_class_icons={
 "GTState": "",
 "GTStateMachine": "res://libs/gt_state_machine/icons/gt_state_machine.svg",
 "GTStateTransition": "",
+"GTStopWatch": "",
 "GTTeleporter2D": "",
-"GTTime": "",
+"GTTimeScale": "",
 "GTTimer": "",
 "GTTriggerArea2D": "",
-"LevelLoader": "",
-"TopdownPlayerController": ""
+"GTTween": ""
 }
 
 [application]
@@ -173,6 +167,7 @@ config/icon="res://icon.png"
 Globals="*res://globals/globals.gd"
 Settings="*res://globals/settings/settings.gd"
 Utils="*res://globals/utils.gd"
+JobQueue="*res://globals/jobs/job_queue.gd"
 
 [debug]
 
@@ -199,7 +194,6 @@ sys_reload={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0.196078, 0.196078, 0.196078, 1 )

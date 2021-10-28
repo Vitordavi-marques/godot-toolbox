@@ -24,6 +24,9 @@ func _initialize() -> void:
 	current_state = get_child(0)
 	current_state.entity = entity
 	current_state.enter({})
+	if current_state.play_on_enter:
+		current_state.animation_player.stop()
+		current_state.animation_player.play(current_state.anim_name_on_enter)
 	current_state.emit_signal("state_entered")
 
 # Change state to 'new_state' GTState node, passing optional aditional info
@@ -32,12 +35,14 @@ func change_state(new_state: Node, info: Dictionary = {}) -> void:
 		var old_state = current_state
 		current_state.exit()
 		if current_state.play_on_exit:
+			current_state.animation_player.stop()
 			current_state.animation_player.play(current_state.anim_name_on_exit)
 		current_state.emit_signal("state_exited")
 		current_state = new_state
 		current_state.entity = entity
 		current_state.enter(info)
 		if current_state.play_on_enter:
+			current_state.animation_player.stop()
 			current_state.animation_player.play(current_state.anim_name_on_enter)
 		current_state.emit_signal("state_entered")
 		emit_signal("state_changed", old_state, new_state)

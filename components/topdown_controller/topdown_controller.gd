@@ -1,5 +1,4 @@
 extends GTDeviceController
-class_name TopdownPlayerController
 
 signal updated_move_direction(direction)
 
