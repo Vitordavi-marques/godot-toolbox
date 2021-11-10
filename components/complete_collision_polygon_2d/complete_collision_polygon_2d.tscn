@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://components/complete_collision_polygon_2d/complete_collision_polygon_2d.gd" type="Script" id=1]
+
+[node name="CompleteCollisionPolygon2D" type="CollisionPolygon2D"]
+script = ExtResource( 1 )

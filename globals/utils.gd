@@ -22,6 +22,10 @@ func rand_direction() -> Vector2:
 	var rand_angle = randf()*2*PI
 	return Vector2(cos(rand_angle), sin(rand_angle))
 
+func snap_direction_4(dir: Vector2) -> Vector2:
+	var angle = (PI/4)*(int(dir.angle()/(PI/4)))
+	return Vector2(sin(angle), cos(angle))
+
 func get_screen_size() -> Vector2:
 	return get_viewport().get_visible_rect().size
 

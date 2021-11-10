@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=1]
+[ext_resource path="res://libs/utils/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=1]
 [ext_resource path="res://components/platformer_controller/platformer_controller.gd" type="Script" id=2]
 
 [node name="player_controller" type="Node"]

@@ -2,7 +2,7 @@ extends Node
 
 var _timer : Timer
 
-var seconds_between_ticks : float = 0.016
+var seconds_between_ticks : float = 0.032
 var calls_per_tick : int = 10
 var queue = {}
 
@@ -52,6 +52,6 @@ class Job:
 	
 	func execute():
 		if method_args.size() > 0:
-			object.call(method_name, method_args)
+			object.callv(method_name, method_args)
 		else:
 			object.call(method_name)

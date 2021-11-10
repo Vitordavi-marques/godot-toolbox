@@ -26,17 +26,23 @@ func spawn_with_pos(pos: Vector2):
 
 func spawn_with_info(info: Dictionary):
 	var entity = _entity_template.instance()
-	if add_to_scene:
-		if is_independent_entity:
-			Globals.get_game().add_entity(entity)
-		else:
-			actor.add_child(entity)
+	_put_entity_in_scene(entity)
 	_apply_info(entity, info)
-	emit_signal("has_spawned_entity")
-	emit_signal("spawned_entity", entity)
+	_spawn_signals(entity)
 	return entity
 
 func _apply_info(_entity, info: Dictionary):
 	for key in info.keys():
 		if key in _entity:
 			_entity.set(key, info[key])
+
+func _put_entity_in_scene(entity):
+	if add_to_scene:
+		if is_independent_entity:
+			Globals.get_game().add_entity(entity)
+		else:
+			actor.add_child(entity)
+
+func _spawn_signals(entity):
+	emit_signal("has_spawned_entity")
+	emit_signal("spawned_entity", entity)
