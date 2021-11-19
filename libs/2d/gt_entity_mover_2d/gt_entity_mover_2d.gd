@@ -5,7 +5,7 @@ signal updated_position(new_position)
 signal has_collided()
 signal collided(result)
 
-const MOVEMENT_THRESHOLD = 1 # Minimum length for the entity to be considered moving. Values below this get clamped to 0
+const MOVEMENT_THRESHOLD = 4 # Minimum length for the entity to be considered moving. Values below this get clamped to 0
 enum MOVEMENT_MODE {
 	MOVE_AND_COLLIDE = 1,
 	MOVE_AND_SLIDE = 2,
@@ -21,10 +21,10 @@ export (bool) var is_enabled = true # Whether or not this node is enabled
 export (bool) var debug_mode = false
 
 var snap : Vector2
-var _stop_on_slope : bool
-var _max_slides : int
-var _floor_max_angle : float
-var _infinite_inertia : bool
+var _stop_on_slope : bool = false
+var _max_slides : int = 4
+var _floor_max_angle : float = 0.785398
+var _infinite_inertia : bool = true
 
 var body : KinematicBody2D
 var velocity : Vector2
@@ -70,7 +70,7 @@ func _move_and_slide_with_snap(delta):
 		_on_collision(body)
 
 # Can be overriden for custom collision resolution
-func _on_collision(body, collision = null):
+func _on_collision(_body, collision = null):
 	pass
 
 # Freezes the body, preserving momentum or not

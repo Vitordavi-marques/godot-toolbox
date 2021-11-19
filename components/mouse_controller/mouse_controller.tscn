@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://components/mouse_controller/mouse_controller.gd" type="Script" id=1]
+
+[node name="MouseController" type="Node"]
+script = ExtResource( 1 )
+use_icon = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="mouse_pos" type="Node2D" parent="CanvasLayer"]
+__meta__ = {
+"_edit_lock_": true
+}

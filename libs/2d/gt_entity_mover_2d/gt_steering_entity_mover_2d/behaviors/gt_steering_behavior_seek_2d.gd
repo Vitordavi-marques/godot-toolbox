@@ -16,7 +16,7 @@ func move(delta):
 	steering = desired_velocity - actor.velocity
 	steering.clamped(max_force)
 	steering /= actor.mass
-	actor.velocity += steering*delta
+	actor.velocity += steering
 
 func _get_target_pos() -> Vector2:
 	if use_target_node and _target:

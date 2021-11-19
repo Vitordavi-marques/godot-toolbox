@@ -22,8 +22,9 @@ func _process(delta):
 
 func _check_is_alive():
 	if current_health <= 0:
+		if is_alive:
+			emit_signal("died")
 		is_alive = false
-		emit_signal("died")
 	else:
 		is_alive = true
 		emit_signal("lived")

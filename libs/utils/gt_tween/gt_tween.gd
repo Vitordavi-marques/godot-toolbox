@@ -3,7 +3,7 @@ class_name GTTween
 
 signal updated_property(value)
 
-const CURVE_LINEAR = preload("res://libs/gt_tween/curves/gt_linear_curve.tres")
+const CURVE_LINEAR = preload("res://libs/utils/gt_tween/curves/gt_linear_curve.tres")
 
 export (Curve) var curve = CURVE_LINEAR
 var _animating = [] # Current properties being animated

@@ -30,7 +30,7 @@ func _ready():
 	_duration_timer.connect("timeout", self, "_on_DurationTimer_timeout")
 
 # Simple camera shake with 'intensity' in pixels, 'duration' in seconds, and many sub-shakes each with 'frequency' duration
-func simple_shake(_intensity: float = 8.0, duration: float = 0.5, frequency: float = 0.1, direction: Vector2 = Vector2.ZERO) -> void:
+func shake(_intensity: float = 8.0, duration: float = 0.5, frequency: float = 0.1, direction: Vector2 = Vector2.ZERO) -> void:
 	if not is_enabled:
 		return
 	_current_intensity = _intensity

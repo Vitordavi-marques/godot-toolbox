@@ -3,6 +3,8 @@ extends Node
 signal has_spawned_entity()
 signal spawned_entity(entity)
 
+const STR_GLOBAL_POSITION = "global_position"
+
 export (NodePath) var _actor_path # Parent actor path
 export (PackedScene) var _entity_template # Entity scene template to spawn
 export (bool) var add_to_scene = true # Add to scene after initializing

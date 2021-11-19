@@ -17,7 +17,6 @@ var _delay_timer : Timer # Delay timer for level loading
 func _ready():
 	world = get_node(_world_path)
 	assert(world != null, "Error initializing LevelLoader, 'world' property is null")
-	assert("level_scenes" in world, "Error initializing LevelLoader, 'world' property has no 'level_scenes' property")
 	_delay_timer = Timer.new()
 	_delay_timer.wait_time = delay_on_level_load
 	_delay_timer.one_shot = true
@@ -25,6 +24,9 @@ func _ready():
 	add_child(_delay_timer)
 
 func _process(delta):
+	check_load_level()
+
+func check_load_level():
 	if not _has_level_to_load or not _delay_timer.is_stopped():
 		return
 	_has_level_to_load = false
@@ -39,7 +41,7 @@ func _process(delta):
 		level.pause_mode = Node.PAUSE_MODE_STOP
 		add_child(level)
 
-func load_level(_current_level_id, with_delay: bool):
+func load_level(_current_level_id, with_delay: bool = false):
 	current_level_id = _current_level_id
 	_has_level_to_load = true
 	if with_delay:

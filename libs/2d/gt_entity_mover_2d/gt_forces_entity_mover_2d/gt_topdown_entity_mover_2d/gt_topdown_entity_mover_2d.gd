@@ -10,6 +10,7 @@ var move_acceleration
 var move_deceleration
 
 var move_timer : Timer
+var deceleration_timer : Timer
 var move_direction : Vector2
 
 func _ready():
@@ -19,14 +20,24 @@ func _ready():
 	move_timer.name = "_MoveTimer"
 	move_timer.connect("timeout", self, "set_move_direction", [Vector2.ZERO])
 	add_child(move_timer)
+	deceleration_timer = Timer.new()
+	deceleration_timer.wait_time = move_deceleration_time
+	deceleration_timer.one_shot = true
+	deceleration_timer.name = "_DecelerationTimer"
+	deceleration_timer.connect("timeout", self, "set_velocity", [Vector2.ZERO])
+	add_child(deceleration_timer)
 
 func _physics_process(delta):
 	if frozen or not is_enabled:
 		return
 	if move_direction == Vector2.ZERO and velocity.length() > MOVEMENT_THRESHOLD:
 		apply_force(-velocity.normalized() * move_deceleration)
-	else:
+		if deceleration_timer.is_stopped():
+			deceleration_timer.start()
+	elif move_direction != Vector2.ZERO:
 		apply_force(move_direction * move_acceleration)
+	else:
+		deceleration_timer.stop()
 	_integrate_forces(delta)
 	velocity += acceleration * delta
 	velocity = velocity.clamped(max_speed)
@@ -58,6 +69,7 @@ func set_move_acceleration_time(_value):
 
 func set_move_deceleration_time(_value):
 	move_deceleration_time = _value
+	deceleration_timer.wait_time = move_deceleration_time
 	_calculate()
 
 func _calculate():
