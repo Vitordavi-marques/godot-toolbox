@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://libs/components/utils/gt_entity_spawner/gt_nst_manager/gt_nst_manager.gd" type="Script" id=1]
+[ext_resource path="res://libs/components/utils/gt_entity_spawner/gt_entity_spawner.tscn" type="PackedScene" id=2]
+
+[node name="NSTManager" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Enemies" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spawner" parent="." instance=ExtResource( 2 )]
+_actor_path = NodePath("../Enemies")
+
+[node name="BetweenWavesTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ReplacementTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="BetweenWavesTimer" to="." method="advance_wave"]
+[connection signal="timeout" from="ReplacementTimer" to="." method="_on_ReplacementTimer_timeout"]

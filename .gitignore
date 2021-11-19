@@ -1,1 +1,4 @@
-/godot-toolbox-items
+/assets
+/tests
+/libs/components/cameras/multitarget_camera_2d
+/libs/components/utils/behavior_tree

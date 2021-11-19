@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://libs/components/utils/gt_entity_spawner/gt_entity_spawner.gd" type="Script" id=1]
+
+
+[node name="EntitySpawner" type="Node"]
+script = ExtResource( 1 )
