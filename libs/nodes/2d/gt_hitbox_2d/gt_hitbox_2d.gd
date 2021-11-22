@@ -1,4 +1,4 @@
-extends GTTriggerArea2D
+extends Area2D
 class_name GTHitbox2D
 
 signal caused_damage(damage) # Caused damage by contact

@@ -27,9 +27,9 @@ onready var move_deceleration = max_move_speed / move_deceleration_time
 onready var air_acceleration = max_move_speed / air_acceleration_time
 onready var air_deceleration = max_move_speed / air_deceleration_time
 
-onready var jump_speed = Utils.jump_speed_formula(jump_height, jump_time)
-onready var jump_gravity = Utils.gravity_formula(jump_height, jump_time)
-onready var fall_gravity = Utils.gravity_formula(jump_height, fall_time)
+onready var jump_speed = jump_speed_formula(jump_height, jump_time)
+onready var jump_gravity = gravity_formula(jump_height, jump_time)
+onready var fall_gravity = gravity_formula(jump_height, fall_time)
 onready var available_jumps : int = max_jumps
 
 var move_direction : int = 0
@@ -43,14 +43,11 @@ func _ready():
 	hang_timer.name = "_HangTimer"
 	add_child(hang_timer)
 
-func _physics_process(delta):
+func _movement(delta):
 	if frozen or not is_enabled:
 		return
-	_apply_gravity()
-	_apply_movement()
-	._move(delta)
-
-func _apply_gravity():
+		
+	# Gravity
 	if velocity.y < 0:
 		apply_force(gravity_mask * jump_gravity)
 	else:
@@ -60,8 +57,8 @@ func _apply_gravity():
 			velocity.y = 0
 		elif hang_timer.is_stopped():
 			apply_force(gravity_mask * fall_gravity)
-
-func _apply_movement():
+	
+	# Movement
 	var acc = move_acceleration
 	var dec = move_deceleration
 	if abs(velocity.y) > MOVEMENT_THRESHOLD:
@@ -71,9 +68,14 @@ func _apply_movement():
 		apply_force(-sign(velocity.x) * Vector2.RIGHT * dec)
 	else:
 		apply_force(move_direction * Vector2.RIGHT * acc)
+	__integrate_forces(delta)
+	velocity += acceleration * delta
 	velocity.x = clamp(velocity.x, -max_move_speed, max_move_speed)
 	if velocity.length() < MOVEMENT_THRESHOLD:
 		velocity = Vector2.ZERO
+	acceleration *= 0
+	
+	._move(delta)
 
 # Jump, applying upward speed
 func jump() -> void:
@@ -105,3 +107,9 @@ func damp_jump() -> void: velocity.y *= jump_damp
 
 func _turn_on_snap() -> void: snap = ground_snap
 func _turn_off_snap() -> void: snap = Vector2.ZERO
+
+func gravity_formula(height, time):
+	return (2*height)/(time*time)
+
+func jump_speed_formula(height, time):
+	return -(2*height)/time

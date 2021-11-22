@@ -1,4 +1,4 @@
-extends GTGroupedArea2D
+extends Area2D
 class_name GTTeleporter2D
 
 signal teleported_entity(cause, entity)
@@ -20,14 +20,14 @@ func _ready():
 	_delay_timer.one_shot = true
 	add_child(_delay_timer)
 	_delay_timer.connect("timeout", self, "_perform_teleport")
-	connect("grouped_area_entered", self, "_on_grouped_area_entered")
-	connect("grouped_body_entered", self, "_on_grouped_body_entered")
+	connect("area_entered", self, "__on_area_entered")
+	connect("body_entered", self, "__on_body_entered")
 
-func _on_grouped_area_entered(area) -> void:
+func __on_area_entered(area) -> void:
 	if is_cause:
 		get_tree().call_group(_CONNECTOR_GROUP, "_teleport", self, area)
 
-func _on_grouped_body_entered(body) -> void:
+func __on_body_entered(body) -> void:
 	if is_cause:
 		get_tree().call_group(_CONNECTOR_GROUP, "_teleport", self, body)
 

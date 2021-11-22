@@ -34,6 +34,9 @@ func _ready():
 	assert(body, "Error initializing GTEntityMover2D: 'body' property is null")
 
 func _physics_process(delta):
+	_movement(delta)
+
+func _movement(delta):
 	if frozen or not is_enabled:
 		return
 	_move(delta)

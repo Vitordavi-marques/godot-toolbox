@@ -11,7 +11,7 @@ func _ready():
 		if child is GTSteeringBehavior2D:
 			behaviors.append(child)
 
-func _physics_process(delta):
+func _movement(delta):
 	if frozen or not is_enabled:
 		return
 	for behavior in behaviors:
