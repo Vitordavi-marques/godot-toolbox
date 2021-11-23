@@ -4,7 +4,7 @@ class_name GTHurtbox2D
 signal took_damage(damage) # Took damage by contact
 
 func _ready():
-	connect("grouped_area_entered", self, "_take_damage")
+	connect("area_entered", self, "_take_damage")
 
 func _take_damage(area):
 	var damage = area.damage
