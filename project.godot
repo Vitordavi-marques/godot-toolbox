@@ -185,11 +185,6 @@ _global_script_classes=[ {
 "path": "res://libs/nodes/utils/gt_state_machine/gt_state_machine.gd"
 }, {
 "base": "Node",
-"class": "GTStateTransition",
-"language": "GDScript",
-"path": "res://libs/nodes/utils/gt_state_machine/__gt_state_transition.gd"
-}, {
-"base": "Node",
 "class": "GTSteeringBehavior2D",
 "language": "GDScript",
 "path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_steering_entity_mover_2d/__gt_steering_behavior_2d.gd"
@@ -280,7 +275,6 @@ _global_script_class_icons={
 "GTSidescrollerEntityMover2D": "",
 "GTState": "",
 "GTStateMachine": "res://libs/nodes/icons/vertical-graph.svg",
-"GTStateTransition": "",
 "GTSteeringBehavior2D": "",
 "GTSteeringBehaviorAbsoluteSeek2D": "",
 "GTSteeringBehaviorSeek2D": "",

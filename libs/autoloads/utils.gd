@@ -31,3 +31,11 @@ func rand_sign() -> int:
 
 func component_assert_message(component) -> String:
 	return "Error initializing Component '%s' (%s)" % [component.name, component]
+
+func node_path_to_str(path: NodePath) -> String:
+	var name = ""
+	for i in path.get_name_count():
+		name += path.get_name(i)
+		if i < path.get_name_count()-1:
+			name += "/"
+	return name

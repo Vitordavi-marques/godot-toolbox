@@ -1,74 +1,85 @@
 extends Node
 class_name GTStateMachine, "res://libs/nodes/icons/vertical-graph.svg"
 
-signal state_changed(old_state, new_state)
+signal state_changed(current)
+
+const STR_PREVIOUS = "previous"
 
 export (NodePath) var _entity_path
+export (NodePath) var starting_state
 export (bool) var is_enabled : bool = true # Whether this node is enabled or not
 export (bool) var _debug_mode : bool = false
 
 var entity : Node # This state machine's owner entity
 var current_state : Node # Current state node
+var states_map = {}
+var states_stack = []
 
 func _ready():
-	var child_states = 0
-	for child in get_children():
-		if child is GTState:
-			child_states += 1
-	entity = get_node(_entity_path)
-	assert(entity != null, "Error initializing GTStateMachine, 'entity' property is null")
-	assert(child_states > 0, "Error initializing GTStateMachine, there is no child GTState node")
-	entity.connect("ready", self, "_initialize")
+	if not starting_state:
+		starting_state = get_child(0).get_path()
+	var queue = [self]
+	while not queue.empty():
+		var n = queue.size()
+		while n > 0:
+			var node = queue.pop_front()
+			if node != self:
+				_init_state(node)
+			for child in node.get_children():
+				queue.append(child)
+			n -= 1
+	states_stack.push_front(get_node(starting_state))
+	_enter_state(states_stack[0], {})
 
-func _initialize() -> void:
-	current_state = get_child(0)
+func _init_state(node):
+	states_map[Utils.node_path_to_str(get_path_to(node))] = node
+	assert(node.has_signal("finished"), "Error initializing GTStateMachine: %s child has no 'finished' signal" % [node.name])
+	node.connect("finished", self, "_change_state")
+
+func _enter_state(state: Node, info: Dictionary):
+	current_state = state
+	current_state.fsm = self
 	current_state.entity = entity
 	current_state.enter({})
-	if current_state.play_on_enter:
-		current_state.enter_animation_player.stop()
-		current_state.enter_animation_player.play(current_state.anim_name_on_enter)
 	current_state.emit_signal("state_entered")
 
-# Change state to 'new_state' GTState node, passing optional aditional info
-func change_state(new_state: Node, info: Dictionary = {}) -> void:
-	if is_enabled:
-		var old_state = current_state
-		current_state.exit()
-		if current_state.play_on_exit:
-			current_state.exit_animation_player.stop()
-			current_state.exit_animation_player.play(current_state.anim_name_on_exit)
-		current_state.emit_signal("state_exited")
-		current_state = new_state
-		current_state.entity = entity
-		current_state.enter(info)
-		if current_state.play_on_enter:
-			current_state.enter_animation_player.stop()
-			current_state.enter_animation_player.play(current_state.anim_name_on_enter)
-		current_state.emit_signal("state_entered")
-		emit_signal("state_changed", old_state, new_state)
+func _exit_state():
+	current_state.exit()
+	current_state.emit_signal("state_exited")
 
-# Change state to node using node path 'new_state_path'
-func change_state_path(new_state_path: String, info: Dictionary = {}) -> void:
-	change_state(get_node(new_state_path), info)
-
-# Disables this node's functionality
-func disable() -> void:
-	is_enabled = false
+func _change_state(state_name: String, info: Dictionary = {}):
+	if not is_enabled:
+		return
+	_exit_state()
+	var state = states_map[state_name]
+	if state_name == STR_PREVIOUS:
+		states_stack.pop_front()
+	elif state.is_memorable:
+		states_stack[0] = state
+	_enter_state(state, info)
+	emit_signal("state_changed", current_state)
 
 # Disables this node's functionality
 func enable() -> void:
 	is_enabled = true
 
+# Disables this node's functionality
+func disable() -> void:
+	is_enabled = false
+
+# Delegate input function to current state
 func _input(event):
-	if is_enabled and current_state.has_method("input") and current_state.do_input:
+	if is_enabled:
 		current_state.input(event)
 
+# Delegate process function to current state
 func _process(delta):
-	if is_enabled and current_state.has_method("process") and current_state.do_process:
+	if is_enabled:
 		current_state.process(delta)
 
+# Delegate physics process function to current state
 func _physics_process(delta):
 	if _debug_mode:
 		print(current_state.name)
-	if is_enabled and current_state.has_method("physics_process") and current_state.do_physics_process:
+	if is_enabled:
 		current_state.physics_process(delta)
