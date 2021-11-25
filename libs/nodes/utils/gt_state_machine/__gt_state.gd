@@ -5,8 +5,6 @@ signal state_entered()
 signal state_exited()
 signal finished
 
-export (bool) var is_memorable = true # Whether or not this state can be put in the states_stack
-
 var fsm : Node # This state's GTStateMachine node
 var entity : Node # The state machine's entity
 

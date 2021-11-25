@@ -104,11 +104,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_entity_mover_2d.gd"
 }, {
-"base": "GTEntityMover2D",
-"class": "GTForcesEntityMover2D",
-"language": "GDScript",
-"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_forces_entity_mover_2d/gt_forces_entity_mover_2d.gd"
-}, {
 "base": "Node",
 "class": "GTFormula",
 "language": "GDScript",
@@ -169,10 +164,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/nodes/2d/gt_screen_shake_2d/gt_screen_shake_2d.gd"
 }, {
-"base": "GTForcesEntityMover2D",
+"base": "GTEntityMover2D",
 "class": "GTSidescrollerEntityMover2D",
 "language": "GDScript",
-"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_forces_entity_mover_2d/gt_sidescroller_entity_mover_2d/gt_sidescroller_entity_mover_2d.gd"
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_sidescroller_entity_mover_2d/gt_sidescroller_entity_mover_2d.gd"
 }, {
 "base": "Node",
 "class": "GTState",
@@ -219,11 +214,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/nodes/utils/gt_time_scale/gt_time_scale.gd"
 }, {
-"base": "GTForcesEntityMover2D",
-"class": "GTTopdownEntityMover2D",
-"language": "GDScript",
-"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_forces_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd"
-}, {
 "base": "Area2D",
 "class": "GTTriggerArea2D",
 "language": "GDScript",
@@ -259,7 +249,6 @@ _global_script_class_icons={
 "GTAudioPlayer": "",
 "GTDeviceController": "",
 "GTEntityMover2D": "res://libs/nodes/icons/move.svg",
-"GTForcesEntityMover2D": "",
 "GTFormula": "res://libs/nodes/icons/omega.svg",
 "GTHealth": "res://libs/nodes/icons/health.svg",
 "GTHitbox2D": "",
@@ -282,7 +271,6 @@ _global_script_class_icons={
 "GTSteeringEntityMover2D": "",
 "GTTeleporter2D": "",
 "GTTimeScale": "res://libs/nodes/icons/hourglass.svg",
-"GTTopdownEntityMover2D": "",
 "GTTriggerArea2D": "",
 "GTTween": "",
 "MouseController": "res://libs/nodes/icons/gamepad-white.svg"

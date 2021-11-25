@@ -13,9 +13,14 @@ export (bool) var _debug_mode : bool = false
 var entity : Node # This state machine's owner entity
 var current_state : Node # Current state node
 var states_map = {}
-var states_stack = []
+var states_names = {}
 
 func _ready():
+	entity = get_node(_entity_path)
+	assert(entity, "Error initializing GTStateMachine: 'entity' property is null")
+	entity.connect("ready", self, "_initialize")
+
+func _initialize():
 	if not starting_state:
 		starting_state = get_child(0).get_path()
 	var queue = [self]
@@ -28,34 +33,33 @@ func _ready():
 			for child in node.get_children():
 				queue.append(child)
 			n -= 1
-	states_stack.push_front(get_node(starting_state))
-	_enter_state(states_stack[0], {})
+	_enter_state(get_node(starting_state), {})
 
 func _init_state(node):
-	states_map[Utils.node_path_to_str(get_path_to(node))] = node
-	assert(node.has_signal("finished"), "Error initializing GTStateMachine: %s child has no 'finished' signal" % [node.name])
-	node.connect("finished", self, "_change_state")
+	if node is GTState:
+		var path_to_node = get_path_to(node)
+		var node_name = Utils.node_path_to_str(path_to_node)
+		states_map[node_name] = node
+		states_names[node] = node_name
+		assert(node.has_signal("finished"), "Error initializing GTStateMachine: %s child has no 'finished' signal" % [node.name])
+		node.connect("finished", self, "change_state")
 
 func _enter_state(state: Node, info: Dictionary):
 	current_state = state
 	current_state.fsm = self
 	current_state.entity = entity
-	current_state.enter({})
+	current_state.enter(info)
 	current_state.emit_signal("state_entered")
 
 func _exit_state():
 	current_state.exit()
 	current_state.emit_signal("state_exited")
 
-func _change_state(state_name: String, info: Dictionary = {}):
+func change_state(state_name: String, info: Dictionary = {}):
 	if not is_enabled:
 		return
 	_exit_state()
 	var state = states_map[state_name]
-	if state_name == STR_PREVIOUS:
-		states_stack.pop_front()
-	elif state.is_memorable:
-		states_stack[0] = state
 	_enter_state(state, info)
 	emit_signal("state_changed", current_state)
 
@@ -69,17 +73,17 @@ func disable() -> void:
 
 # Delegate input function to current state
 func _input(event):
-	if is_enabled:
+	if is_enabled and current_state:
 		current_state.input(event)
 
 # Delegate process function to current state
 func _process(delta):
-	if is_enabled:
+	if is_enabled and current_state:
 		current_state.process(delta)
 
 # Delegate physics process function to current state
 func _physics_process(delta):
 	if _debug_mode:
-		print(current_state.name)
-	if is_enabled:
+		print(states_names[current_state])
+	if is_enabled and current_state:
 		current_state.physics_process(delta)

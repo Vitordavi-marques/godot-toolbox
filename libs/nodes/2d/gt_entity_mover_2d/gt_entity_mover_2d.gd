@@ -5,7 +5,7 @@ signal updated_position(new_position)
 signal has_collided()
 signal collided(result)
 
-const MOVEMENT_THRESHOLD = 4 # Minimum length for the entity to be considered moving. Values below this get clamped to 0
+const MOVEMENT_THRESHOLD = 0.5 # Minimum length for the entity to be considered moving. Values below this get clamped to 0
 enum MOVEMENT_MODE {
 	MOVE_AND_COLLIDE = 1,
 	MOVE_AND_SLIDE = 2,
