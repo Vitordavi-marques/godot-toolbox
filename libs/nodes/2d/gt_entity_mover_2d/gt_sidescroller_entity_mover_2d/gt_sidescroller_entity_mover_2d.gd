@@ -9,6 +9,7 @@ signal landed()
 signal ran_out_of_jumps()
 
 export (int) var move_speed = 256
+export (int) var max_falling_speed = 1024
 export (Curve) var ground_velocity_curve = CURVE_LINEAR_EASE_IN
 export (float) var ground_acceleration_time = 0.1
 export (Curve) var ground_friction_curve = CURVE_LINEAR_EASE_OUT
@@ -45,20 +46,20 @@ func _movement(delta):
 		velocity.y += jump_gravity * delta
 	else:
 		velocity.y += fall_gravity * delta
+	if velocity.y > max_falling_speed:
+		velocity.y = max_falling_speed
 	
 	# Movement
-	var info
-	var move_sign
-	if move_direction != 0:
-		info = get_acceleration_info()
-		move_sign = sign(move_direction)
-	else:
+	var info = get_acceleration_info()
+	var move_sign = sign(move_direction)
+	if move_direction == 0:
 		info = get_deceleration_info()
 		move_sign = sign(velocity.x)
+	
 	var t = clamp(move_direction_press_timer/info["time"], 0.0, 1.0)
 	var desired_velocity = move_speed * info["curve"].interpolate_baked(t)
-	
 	velocity.x = move_sign * desired_velocity
+	
 	if velocity.length() < MOVEMENT_THRESHOLD:
 		velocity = Vector2.ZERO
 	._move(delta)
@@ -107,6 +108,9 @@ func set_move_direction(dir: int) -> void:
 	if dir != move_direction:
 		move_direction_press_timer = 0.0
 	move_direction = dir
+
+func set_move_speed(_speed: int) -> void:
+	move_speed = _speed
 
 func restore_jumps() -> void: available_jumps = max_jumps
 func can_jump() -> bool: return available_jumps > 0

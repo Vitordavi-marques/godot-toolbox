@@ -214,6 +214,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/nodes/utils/gt_time_scale/gt_time_scale.gd"
 }, {
+"base": "GTEntityMover2D",
+"class": "GTTopdownEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd"
+}, {
 "base": "Area2D",
 "class": "GTTriggerArea2D",
 "language": "GDScript",
@@ -271,6 +276,7 @@ _global_script_class_icons={
 "GTSteeringEntityMover2D": "",
 "GTTeleporter2D": "",
 "GTTimeScale": "res://libs/nodes/icons/hourglass.svg",
+"GTTopdownEntityMover2D": "",
 "GTTriggerArea2D": "",
 "GTTween": "",
 "MouseController": "res://libs/nodes/icons/gamepad-white.svg"
